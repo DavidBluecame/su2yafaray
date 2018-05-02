@@ -19,9 +19,6 @@ end
 
 
 def initialize(yi)
-	plugins_path=File.join(File.dirname(__FILE__),'bin','yafaray-plugins')
-	p plugins_path
-	yi.loadPlugins(plugins_path)
 	yi.startScene(0)
 	##FIXME DAVID yi.setInputGamma(1, true)
 end	
@@ -49,7 +46,7 @@ def export_render_params(yi)
 		yi.paramsSetInt("threads",Integer(@ys.threads))
 	end
 	
-	imageMem = Yafaray_v3_interface_ruby.new_floatArray(Integer(@ys.width) * Integer(@ys.height) * 4)
+	imageMem = Yafaray4_binding_ruby.new_floatArray(Integer(@ys.width) * Integer(@ys.height) * 4)
 	yi.paramsSetInt("width", Integer(@ys.width))
 	yi.paramsSetInt("height", Integer(@ys.height))
 

@@ -24,10 +24,10 @@
 #					SU2POV by Didier Bur and OGRE exporter by Kojack
 # Usage        : Compress su2yafaray_loader.rb and su2yafaray folder into a zip file.
 #                Then, rename extension from .zip to .rbz and install .rbz file with Sketchup Plugins Manager
-#                (Functionality way behind YafaRay Core v3.2.0, very limited and probably buggy (alpha state))
-# Date         : 2017-03-18
+#                (Functionality way behind YafaRay Core v4.0.0, very limited and probably buggy (alpha state))
+# Date         : 2018-05-02
 # Type         : Exporter
-# Version      : 3.2.0-alpha
+# Version      : 4.0.0-PRE-ALPHA
 
 
 $:.push(File.join(File.dirname(__FILE__)))  #add the su2yafaray folder to the ruby library search list
@@ -37,8 +37,8 @@ require 'sketchup.rb'
 path=File.join(File.dirname(__FILE__),'bin')
 ENV["path"] = path.to_s + ";" + ENV["path"].to_s  #To avoid the "error 126" when loading the "required" .so modules
 
-require 'yafqt'
-require 'yafaray_v3_interface_ruby'
+require 'yafaray4_gui_binding_ruby'
+require 'yafaray4_binding_ruby'
 
 module SU2YAFARAY
 
@@ -109,8 +109,8 @@ def SU2YAFARAY.render(useXML)
 		if export_file_path
 			#if export_file_path=nil  
 			#export_file_path="C:\yafaray.xml"
-			yi=Yafaray_v3_interface_ruby::XmlInterface_t.new
-			co=Yafaray_v3_interface_ruby::ImageOutput_t.new
+			yi=Yafaray4_binding_ruby::XmlInterface_t.new
+			co=Yafaray4_binding_ruby::ImageOutput_t.new
 			yi.setOutfile(export_file_path)
 			
 			SU2YAFARAY.set_params(yi)
@@ -119,15 +119,15 @@ def SU2YAFARAY.render(useXML)
 			yi.clearAll()
 		end
 	else
-		yi=Yafaray_v3_interface_ruby::YafrayInterface_t.new
+		yi=Yafaray4_binding_ruby::Interface_t.new
 		SU2YAFARAY.set_params(yi)
 		result=SU2YAFARAY.report_window(start_time,"Time")
 		if result==6
-			Yafqt.initGui
-			settings=Yafqt::Settings.new
+			Yafaray4_gui_binding_ruby.initGui
+			settings=Yafaray4_gui_binding_ruby::Settings.new
 			settings.autoSave=false
 			settings.closeAfterFinish=false
-			Yafqt.createRenderWidget(yi,Integer(@ys.width),Integer(@ys.height),0,0,settings)
+			Yafaray4_gui_binding_ruby.createRenderWidget(yi,Integer(@ys.width),Integer(@ys.height),0,0,settings)
 			yi.clearAll();
 		else
 			yi.clearAll();
