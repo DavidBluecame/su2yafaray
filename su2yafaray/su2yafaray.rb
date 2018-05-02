@@ -109,7 +109,7 @@ def SU2YAFARAY.render(useXML)
 		if export_file_path
 			#if export_file_path=nil  
 			#export_file_path="C:\yafaray.xml"
-			yi=Yafaray4_binding_ruby::XmlInterface_t.new
+			yi=Yafaray4_binding_ruby::InterfaceXml_t.new
 			co=Yafaray4_binding_ruby::ImageOutput_t.new
 			yi.setOutfile(export_file_path)
 			
