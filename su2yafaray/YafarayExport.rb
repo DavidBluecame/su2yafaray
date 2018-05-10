@@ -646,7 +646,7 @@ def export_face(yi,mat,fm_mat)
 	 end
 	 pl=yi.startTriMesh(id, pointcount, polycount, false,has_texture,0)
 	 if not pl 
-	 p 'error create trimesh'
+	 p 'error create MeshObject'
 	 end
 	 startindex = 0
 	
@@ -711,7 +711,7 @@ def export_face(yi,mat,fm_mat)
 	
 
 	i=0
-	# #out.puts 'Shape "trianglemesh" "integer indices" ['
+	# #out.puts 'Shape "MeshObject" "integer indices" ['
 	 for mesh in meshes
 	  	mirrored_tmp = mirrored[i]
 		mat_dir_tmp = mat_dir[i]
@@ -723,35 +723,35 @@ def export_face(yi,mat,fm_mat)
 			if !mirrored_tmp
 				if mat_dir_tmp==true
 					if has_texture
-						yi.addTriangle(v1-1,v2-1,v3-1,v1-1,v2-1,v3-1,yafaraymat)
+						yi.addFace(v1-1,v2-1,v3-1,v1-1,v2-1,v3-1,yafaraymat)
 					else
-						yi.addTriangle(v1-1,v2-1,v3-1, yafaraymat)
+						yi.addFace(v1-1,v2-1,v3-1, yafaraymat)
 					end
 				else
 					#p "#{v1-1} #{v3-1} #{v2-1}\n"
-					#yi.addTriangle(v1-1,v3-1,v2-1, yafaraymat)
+					#yi.addFace(v1-1,v3-1,v2-1, yafaraymat)
 					if has_texture
-						yi.addTriangle(v1-1,v3-1,v2-1,v1-1,v3-1,v2-1, yafaraymat)
+						yi.addFace(v1-1,v3-1,v2-1,v1-1,v3-1,v2-1, yafaraymat)
 					else
-						yi.addTriangle(v1-1,v3-1,v2-1, yafaraymat)
+						yi.addFace(v1-1,v3-1,v2-1, yafaraymat)
 					end
 				end
 			else
 				if mat_dir_tmp==true
 					#p "#{v2-1} #{v1-1} #{v3-1}\n"
-					#yi.addTriangle(v2-1,v1-1,v3-1, yafaraymat)
+					#yi.addFace(v2-1,v1-1,v3-1, yafaraymat)
 					if has_texture
-						yi.addTriangle(v2-1,v1-1,v3-1,v2-1,v1-1,v3-1, yafaraymat)
+						yi.addFace(v2-1,v1-1,v3-1,v2-1,v1-1,v3-1, yafaraymat)
 					else
-						yi.addTriangle(v2-1,v1-1,v3-1, yafaraymat)
+						yi.addFace(v2-1,v1-1,v3-1, yafaraymat)
 					end
 				else
 					#p "#{v2-1} #{v3-1} #{v1-1}\n"
-					#yi.addTriangle(v2-1,v3-1,v1-1, yafaraymat)
+					#yi.addFace(v2-1,v3-1,v1-1, yafaraymat)
 					if has_texture
-						yi.addTriangle(v2-1,v3-1,v1-1,v2-1,v3-1,v1-1, yafaraymat)
+						yi.addFace(v2-1,v3-1,v1-1,v2-1,v3-1,v1-1, yafaraymat)
 					else
-						yi.addTriangle(v2-1,v3-1,v1-1, yafaraymat)
+						yi.addFace(v2-1,v3-1,v1-1, yafaraymat)
 					end
 				end
 			end		
@@ -776,7 +776,7 @@ def export_face(yi,mat,fm_mat)
 		# # end
 		# # i += 1
 	# # end
-	yi.endTriMesh()
+	yi.endMeshObject()
 	yi.smoothMesh(0, 181)
 	
 end
